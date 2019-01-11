@@ -27,21 +27,21 @@ class Email
     /**
      * Email constructor.
      */
-    public function __construct()
+    public function __construct($smtpDebug, $host, $user, $pass, $smtpSecure, $port, $setFromEmail, $setFromName)
     {
         $this->mail = new PHPMailer(true);
-        $this->mail->SMTPDebug = 2;                                 // Enable verbose debug output
-        $this->mail->isSMTP();                                      // Set mailer to use SMTP
-        $this->mail->Host = 'smtp.sendgrid.net';                      // Specify main and backup SMTP servers
+        $this->mail->SMTPDebug = $smtpDebug;                           // Enable verbose debug output
+        $this->mail->isSMTP();                                        // Set mailer to use SMTP
+        $this->mail->Host = $host;                                   // Specify main and backup SMTP servers
         $this->mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $this->mail->Username = 'apikey';       // SMTP username
-        $this->mail->Password = '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';                        // SMTP password
-        $this->mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $this->mail->Port = 587;                                    // TCP port to connect to
+        $this->mail->Username = $user;                             // SMTP username
+        $this->mail->Password = $pass;                            // SMTP password
+        $this->mail->SMTPSecure = $smtpSecure;                   // Enable TLS encryption, `ssl` also accepted
+        $this->mail->Port = $port;                              // TCP port to connect to
         $this->mail->CharSet = 'utf-8';
         $this->mail->setLanguage('br');
         $this->mail->isHTML(true);
-        $this->mail->setFrom('ccaio5119@gmail.com', 'Suporte Informatika');
+        $this->mail->setFrom($setFromEmail, $setFromName);
     }
 
     /**
